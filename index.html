@@ -3,122 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Reliance Global Courier Service - reliable courier and delivery solutions.">
+  <meta name="description" content="Reliance Global Courier Service - dependable parcel, document and international delivery solutions.">
   <title>Reliance Global Courier Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container nav">
-      <a class="logo" href="#home">Reliance<span>Global</span></a>
-      <button class="menu-toggle" aria-label="Open menu">☰</button>
-      <nav id="nav">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#tracking">Track Shipment</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<header class="header"><div class="container nav">
+  <a class="logo" href="#home"><span class="logo-mark">RG</span><span>Reliance <b>Global</b></span></a>
+  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav id="nav"><a href="#home">Home</a><a href="#services">Services</a><a href="#tracking">Track Shipment</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main>
+<section id="home" class="hero">
+  <div class="container hero-content">
+    <div>
+      <p class="eyebrow">GLOBAL COURIER & DELIVERY</p>
+      <h1>Moving your packages <span>with confidence.</span></h1>
+      <p class="hero-text">Reliable courier solutions for documents, parcels, business shipments and international deliveries.</p>
+      <div class="hero-buttons"><a class="button primary" href="#tracking">Track a Shipment →</a><a class="button light" href="#contact">Request a Quote</a></div>
+      <div class="trust"><span>✓ Professional service</span><span>✓ Careful handling</span><span>✓ Clear communication</span></div>
     </div>
-  </header>
+    <div class="hero-card"><div class="plane">✈</div><p class="mini">DELIVERY MADE SIMPLE</p><h3>From pickup to destination.</h3><p>Dependable support for personal, business and international shipments.</p><a href="#contact">Speak with us →</a></div>
+  </div>
+</section>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="container hero-content">
-        <div>
-          <p class="eyebrow">GLOBAL COURIER & DELIVERY</p>
-          <h1>Moving your packages with confidence.</h1>
-          <p class="hero-text">Reliable courier solutions for documents, parcels, business shipments and international deliveries.</p>
-          <div class="hero-buttons">
-            <a class="button primary" href="#tracking">Track a Shipment</a>
-            <a class="button secondary" href="#contact">Request a Quote</a>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="package-icon">✈</div>
-          <h3>Worldwide Delivery</h3>
-          <p>Professional service designed to keep your shipments moving.</p>
-        </div>
-      </div>
-    </section>
+<section id="services" class="section"><div class="container">
+  <div class="heading"><p class="eyebrow">OUR SERVICES</p><h2>Courier solutions for every shipment</h2><p>Professional delivery options designed around your shipment and destination.</p></div>
+  <div class="cards">
+    <article class="card"><div class="icon blue">📦</div><h3>Parcel Delivery</h3><p>Safe and dependable delivery for packages of different sizes.</p><a href="#contact">Learn more →</a></article>
+    <article class="card"><div class="icon gold">📄</div><h3>Document Delivery</h3><p>Fast handling for important documents and business correspondence.</p><a href="#contact">Learn more →</a></article>
+    <article class="card"><div class="icon green">🌍</div><h3>International Shipping</h3><p>Courier support for shipments moving across borders.</p><a href="#contact">Learn more →</a></article>
+  </div>
+</div></section>
 
-    <section id="services" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">OUR SERVICES</p>
-          <h2>Courier solutions for every shipment</h2>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <div class="icon">📦</div>
-            <h3>Parcel Delivery</h3>
-            <p>Safe and dependable delivery for packages of different sizes.</p>
-          </article>
-          <article class="card">
-            <div class="icon">📄</div>
-            <h3>Document Delivery</h3>
-            <p>Fast handling for important documents and business correspondence.</p>
-          </article>
-          <article class="card">
-            <div class="icon">🌍</div>
-            <h3>International Shipping</h3>
-            <p>Courier support for shipments moving across borders.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+<section id="tracking" class="tracking section"><div class="container tracking-box">
+  <div><p class="eyebrow">SHIPMENT TRACKING</p><h2>Track your shipment</h2><p>Enter your tracking number below to check your shipment.</p></div>
+  <form id="tracking-form"><label for="tracking-number">Tracking number</label><div class="tracking-row"><input id="tracking-number" type="text" placeholder="Enter tracking number" required><button class="button primary" type="submit">Track</button></div><p id="tracking-result" class="result" aria-live="polite"></p></form>
+</div></section>
 
-    <section id="tracking" class="tracking section">
-      <div class="container tracking-box">
-        <div>
-          <p class="eyebrow">SHIPMENT TRACKING</p>
-          <h2>Track your shipment</h2>
-          <p>Enter your tracking number below to check your shipment.</p>
-        </div>
-        <form id="tracking-form">
-          <label for="tracking-number">Tracking number</label>
-          <div class="tracking-row">
-            <input id="tracking-number" type="text" placeholder="Enter tracking number" required>
-            <button class="button primary" type="submit">Track</button>
-          </div>
-          <p id="tracking-result" class="result" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
+<section id="about" class="section about-section"><div class="container about">
+  <div class="about-visual"><div class="visual-card"><span>🚚</span><strong>Reliable Delivery</strong><small>Professional courier support</small></div></div>
+  <div><p class="eyebrow">ABOUT US</p><h2>Dependable service from pickup to delivery.</h2><p>Reliance Global Courier Service is focused on dependable parcel and document delivery. Our goal is to provide clear communication, careful handling and professional service for individuals and businesses.</p>
+  <div class="points"><div><b>01</b> Careful shipment handling</div><div><b>02</b> Professional communication</div><div><b>03</b> Delivery support for businesses and individuals</div></div></div>
+</div></section>
 
-    <section id="about" class="section">
-      <div class="container about">
-        <div>
-          <p class="eyebrow">ABOUT US</p>
-          <h2>Dependable service from pickup to delivery.</h2>
-        </div>
-        <p>Reliance Global Courier Service is focused on dependable parcel and document delivery. Our goal is to provide clear communication, careful handling and professional service for individuals and businesses.</p>
-      </div>
-    </section>
+<section id="contact" class="section"><div class="container contact">
+  <div><p class="eyebrow">GET IN TOUCH</p><h2>Need a delivery solution?</h2><p>Contact Reliance Global Courier Service for shipment questions, delivery assistance or a quote.</p><div class="hero-buttons"><a class="button primary" href="tel:+16185040372">Call +1 (618) 504-0372</a><a class="button secondary" href="mailto:relianceglobalcodelivery@yahoo.com">Email Us</a></div></div>
+  <div class="contact-card"><p>✉ <small>Email</small><a href="mailto:relianceglobalcodelivery@yahoo.com">relianceglobalcodelivery@yahoo.com</a></p><p>☎ <small>Phone</small><a href="tel:+16185040372">+1 (618) 504-0372</a></p><p>◷ <small>Hours</small> Monday–Friday, 9:00 AM–5:00 PM</p></div>
+</div></section>
+</main>
 
-    <section id="contact" class="section contact-section">
-      <div class="container contact">
-        <div>
-          <p class="eyebrow">GET IN TOUCH</p>
-          <h2>Need a delivery solution?</h2>
-          <p>Contact Reliance Global Courier Service for shipment questions, delivery assistance or a quote.</p>
-        </div>
-        <div class="contact-card">
-          <p><strong>Email:</strong> info@relianceglobalcourier.com</p>
-          <p><strong>Phone:</strong> +1 (000) 000-0000</p>
-          <p><strong>Hours:</strong> Monday–Friday, 9:00 AM–5:00 PM</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer">
-      <p>© <span id="year"></span> Reliance Global Courier Service. All rights reserved.</p>
-      <a href="#home">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<footer><div class="container footer"><p>© <span id="year"></span> Reliance Global Courier Service. All rights reserved.</p><a href="#home">Back to top ↑</a></div></footer>
+<script src="script.js"></script>
+</body></html>
