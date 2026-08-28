@@ -4,22 +4,24 @@ const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.getElementById("nav");
 
 menuToggle.addEventListener("click", () => {
-  nav.classList.toggle("open");
+  const open = nav.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
 });
 
-document.querySelectorAll("nav a").forEach(link => {
-  link.addEventListener("click", () => nav.classList.remove("open"));
+document.querySelectorAll("nav a").forEach(a => {
+  a.addEventListener("click", () => {
+    nav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
 });
 
-document.getElementById("tracking-form").addEventListener("submit", function (event) {
-  event.preventDefault();
-  const number = document.getElementById("tracking-number").value.trim();
-  const result = document.getElementById("tracking-result");
+document.getElementById("tracking-form").addEventListener("submit", e => {
+  e.preventDefault();
 
-  if (!number) {
-    result.textContent = "Please enter a tracking number.";
-    return;
-  }
+  const n = document.getElementById("tracking-number").value.trim();
+  const r = document.getElementById("tracking-result");
 
-  result.textContent = "Tracking number received. Live shipment tracking will be connected when a tracking system is added.";
+  r.textContent = n
+    ? "Tracking number received. For the latest shipment update, please contact Reliance Global Courier Service at +1 (618) 504-0372 or relianceglobalcodelivery@yahoo.com."
+    : "Please enter a tracking number.";
 });
