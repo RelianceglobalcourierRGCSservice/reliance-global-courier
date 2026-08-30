@@ -1,23 +1,56 @@
 document.getElementById('year').textContent=new Date().getFullYear();
 const menu=document.querySelector('.menu'),nav=document.querySelector('nav');
-menu.addEventListener('click',()=>nav.classList.toggle('open'));
+if(menu&&nav) menu.addEventListener('click',()=>nav.classList.toggle('open'));
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-document.querySelector('#tracking form').addEventListener('submit',e=>{e.preventDefault();const n=document.getElementById('track').value.trim();document.getElementById('result').textContent=n?'Tracking number received. For the latest update, please contact +1 (618) 504-0372 or relianceglobalcodelivery@yahoo.com.':'Please enter a tracking number.'});
 
-const chatToggle=document.getElementById('chatToggle');
-const chatBox=document.getElementById('chatBox');
-const chatClose=document.getElementById('chatClose');
-if(chatToggle&&chatBox){
-  chatToggle.addEventListener('click',()=>{
-    const open=chatBox.classList.toggle('open');
-    chatToggle.setAttribute('aria-expanded',open);
-    chatBox.setAttribute('aria-hidden',!open);
-  });
+// RGCS tracking records — demonstration data for the first website phase.
+const trackingRecords={
+  'RGCS100001':{status:'In Transit',origin:'London, UK',destination:'Chicago, USA',updated:'August 30, 2026',events:[['Shipment accepted','London, UK','Aug 28, 2026'],['Departed origin facility','London, UK','Aug 29, 2026'],['In transit','International route','Aug 30, 2026']]},
+  'RGCS100002':{status:'Out for Delivery',origin:'Chicago, USA',destination:'Chicago, USA',updated:'August 30, 2026',events:[['Shipment accepted','Chicago, USA','Aug 29, 2026'],['Arrived at local facility','Chicago, USA','Aug 30, 2026'],['Out for delivery','Chicago, USA','Aug 30, 2026']]},
+  'RGCS100003':{status:'Delivered',origin:'London, UK',destination:'Chicago, USA',updated:'August 29, 2026',events:[['Shipment accepted','London, UK','Aug 26, 2026'],['Arrived at destination','Chicago, USA','Aug 29, 2026'],['Delivered','Chicago, USA','Aug 29, 2026']]}
+};
+const trackingForm=document.getElementById('trackingForm');
+if(trackingForm){
+ trackingForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('track').value.trim().toUpperCase();
+  const box=document.getElementById('trackingResult'),err=document.getElementById('trackingError');
+  err.textContent=''; box.classList.remove('show');
+  const r=trackingRecords[n];
+  if(!r){err.textContent='Tracking number not found. Please check the number and try again.';return;}
+  box.innerHTML=`<div class="tracking-status"><strong>${r.status}</strong><span class="status-badge">RGCS Shipment</span></div><div class="tracking-meta"><div><small>Tracking number</small><b>${n}</b></div><div><small>Origin</small><b>${r.origin}</b></div><div><small>Destination</small><b>${r.destination}</b></div></div><div class="timeline">${r.events.map(x=>`<div class="timeline-item"><b>${x[0]}</b><small>${x[1]} · ${x[2]}</small></div>`).join('')}</div><p class="tracking-note">Last updated: ${r.updated}</p>`;
+  box.classList.add('show');
+ });
 }
-if(chatClose&&chatBox&&chatToggle){
-  chatClose.addEventListener('click',()=>{
-    chatBox.classList.remove('open');
-    chatToggle.setAttribute('aria-expanded','false');
-    chatBox.setAttribute('aria-hidden','true');
-  });
+
+const chatToggle=document.getElementById('chatToggle'),chatBox=document.getElementById('chatBox'),chatClose=document.getElementById('chatClose');
+if(chatToggle&&chatBox){chatToggle.addEventListener('click',()=>{const open=chatBox.classList.toggle('open');chatToggle.setAttribute('aria-expanded',open);chatBox.setAttribute('aria-hidden',!open);});}
+if(chatClose&&chatBox&&chatToggle){chatClose.addEventListener('click',()=>{chatBox.classList.remove('open');chatToggle.setAttribute('aria-expanded','false');chatBox.setAttribute('aria-hidden','true');});}
+
+const LANGS={
+en:{name:"English",nav_home:"Home",nav_services:"Services",nav_track:"Track Shipment",nav_about:"About Us",nav_contact:"Contact",nav_quote:"Request a Quote",hero_badge:"FAST. RELIABLE. WORLDWIDE.",hero_title:"Delivering beyond expectations.",hero_desc:"Reliable courier solutions for documents, parcels, business shipments and international deliveries.",track_btn:"⌕  TRACK A SHIPMENT",quote_btn:"▣  REQUEST A QUOTE",benefit_fast:"FAST DELIVERY",benefit_fast_desc:"On-time delivery, every time",benefit_safe:"SAFE & SECURE",benefit_safe_desc:"Your packages are in safe hands",benefit_global:"GLOBAL REACH",benefit_global_desc:"Delivering across borders",benefit_support:"24/7 SUPPORT",benefit_support_desc:"We're here to help you",services_label:"OUR SERVICES",services_title:"Courier solutions",parcel_title:"Parcel Delivery",parcel_desc:"Safe and dependable delivery for packages of different sizes.",document_title:"Document Delivery",document_desc:"Fast handling for important documents and business correspondence.",international_title:"International Shipping",international_desc:"Courier support for shipments moving across borders.",all_services:"VIEW ALL SERVICES →",tracking_label:"SHIPMENT TRACKING",tracking_title:"Track your shipment",tracking_desc:"Enter your tracking number below to check your shipment status.",tracking_placeholder:"Tracking number",tracking_btn:"⌕ TRACK",tracking_note:"ⓘ  For the latest shipment update, please contact our support team.",about_label:"ABOUT US",about_title:"Dependable service",about_desc:"Reliance Global Courier Service is focused on dependable parcel delivery and logistics solutions.",about_1:"Dependable service from pickup to delivery",about_2:"Careful shipment handling",about_3:"Professional communication",about_4:"Delivery support for businesses and individuals",learn_more:"LEARN MORE ABOUT US →",contact_label:"GET IN TOUCH",contact_title:"We're ready to help.",service_label:"OUR SERVICE",service_desc:"Local & international delivery",hours_label:"BUSINESS HOURS",hours_desc:"Monday–Friday, 9:00 AM–5:00 PM",quick_links:"QUICK LINKS",contact_info:"CONTACT INFO",footer_tag:"We deliver your trust, anywhere in the world."},
+es:{name:"Español",nav_home:"Inicio",nav_services:"Servicios",nav_track:"Rastrear envío",nav_about:"Sobre nosotros",nav_contact:"Contacto",nav_quote:"Solicitar cotización",hero_badge:"RÁPIDO. CONFIABLE. MUNDIAL.",hero_title:"Entregando más allá de las expectativas.",hero_desc:"Soluciones de mensajería confiables para documentos, paquetes, envíos comerciales y entregas internacionales.",track_btn:"⌕  RASTREAR ENVÍO",quote_btn:"▣  SOLICITAR COTIZACIÓN",benefit_fast:"ENTREGA RÁPIDA",benefit_fast_desc:"Entrega puntual, siempre",benefit_safe:"SEGURO Y PROTEGIDO",benefit_safe_desc:"Sus paquetes están en buenas manos",benefit_global:"ALCANCE GLOBAL",benefit_global_desc:"Entregas a través de fronteras",benefit_support:"SOPORTE 24/7",benefit_support_desc:"Estamos aquí para ayudarle",services_label:"NUESTROS SERVICIOS",services_title:"Soluciones de mensajería",parcel_title:"Entrega de paquetes",parcel_desc:"Entrega segura y confiable para paquetes de diferentes tamaños.",document_title:"Entrega de documentos",document_desc:"Gestión rápida de documentos importantes y correspondencia comercial.",international_title:"Envío internacional",international_desc:"Soporte de mensajería para envíos que cruzan fronteras.",all_services:"VER TODOS LOS SERVICIOS →",tracking_label:"RASTREO DE ENVÍOS",tracking_title:"Rastree su envío",tracking_desc:"Ingrese su número de rastreo para consultar el estado de su envío.",tracking_placeholder:"Número de rastreo",tracking_btn:"⌕ RASTREAR",tracking_note:"ⓘ Para conocer la última actualización, contacte a nuestro equipo de soporte.",about_label:"SOBRE NOSOTROS",about_title:"Servicio confiable",about_desc:"Reliance Global Courier Service se enfoca en entregas de paquetes y soluciones logísticas confiables.",about_1:"Servicio confiable desde la recogida hasta la entrega",about_2:"Manejo cuidadoso de envíos",about_3:"Comunicación profesional",about_4:"Soporte de entrega para empresas y particulares",learn_more:"CONOZCA MÁS SOBRE NOSOTROS →",contact_label:"CONTÁCTENOS",contact_title:"Estamos listos para ayudar.",service_label:"NUESTRO SERVICIO",service_desc:"Entrega local e internacional",hours_label:"HORARIO",hours_desc:"Lunes–viernes, 9:00 AM–5:00 PM",quick_links:"ENLACES RÁPIDOS",contact_info:"INFORMACIÓN DE CONTACTO",footer_tag:"Entregamos su confianza, en cualquier parte del mundo."},
+pt:{name:"Português",nav_home:"Início",nav_services:"Serviços",nav_track:"Rastrear envio",nav_about:"Sobre nós",nav_contact:"Contato",nav_quote:"Solicitar orçamento",hero_badge:"RÁPIDO. CONFIÁVEL. MUNDIAL.",hero_title:"Entregando além das expectativas.",hero_desc:"Soluções confiáveis de courier para documentos, encomendas, remessas comerciais e entregas internacionais.",track_btn:"⌕  RASTREAR ENVIO",quote_btn:"▣  SOLICITAR ORÇAMENTO",benefit_fast:"ENTREGA RÁPIDA",benefit_fast_desc:"Entrega pontual, sempre",benefit_safe:"SEGURO E PROTEGIDO",benefit_safe_desc:"Seus pacotes estão em boas mãos",benefit_global:"ALCANCE GLOBAL",benefit_global_desc:"Entregas além das fronteiras",benefit_support:"SUPORTE 24/7",benefit_support_desc:"Estamos aqui para ajudar",services_label:"NOSSOS SERVIÇOS",services_title:"Soluções de courier",parcel_title:"Entrega de encomendas",parcel_desc:"Entrega segura e confiável para pacotes de vários tamanhos.",document_title:"Entrega de documentos",document_desc:"Manuseio rápido de documentos importantes e correspondência comercial.",international_title:"Envio internacional",international_desc:"Suporte de courier para remessas que cruzam fronteiras.",all_services:"VER TODOS OS SERVIÇOS →",tracking_label:"RASTREAMENTO DE ENVIOS",tracking_title:"Rastreie seu envio",tracking_desc:"Digite seu número de rastreamento para verificar o status do envio.",tracking_placeholder:"Número de rastreamento",tracking_btn:"⌕ RASTREAR",tracking_note:"ⓘ Para a atualização mais recente, entre em contato com nossa equipe de suporte.",about_label:"SOBRE NÓS",about_title:"Serviço confiável",about_desc:"A Reliance Global Courier Service oferece entrega de encomendas e soluções logísticas confiáveis.",about_1:"Serviço confiável da coleta à entrega",about_2:"Manuseio cuidadoso das remessas",about_3:"Comunicação profissional",about_4:"Suporte de entrega para empresas e pessoas",learn_more:"SAIBA MAIS SOBRE NÓS →",contact_label:"FALE CONOSCO",contact_title:"Estamos prontos para ajudar.",service_label:"NOSSO SERVIÇO",service_desc:"Entrega local e internacional",hours_label:"HORÁRIO",hours_desc:"Segunda–sexta, 9:00–17:00",quick_links:"LINKS RÁPIDOS",contact_info:"INFORMAÇÕES DE CONTATO",footer_tag:"Entregamos sua confiança em qualquer lugar do mundo."},
+fr:{name:"Français",nav_home:"Accueil",nav_services:"Services",nav_track:"Suivre l'envoi",nav_about:"À propos",nav_contact:"Contact",nav_quote:"Demander un devis",hero_badge:"RAPIDE. FIABLE. MONDIAL.",hero_title:"Livrer au-delà des attentes.",hero_desc:"Des solutions de messagerie fiables pour documents, colis, expéditions professionnelles et livraisons internationales.",track_btn:"⌕  SUIVRE UN ENVOI",quote_btn:"▣  DEMANDER UN DEVIS",benefit_fast:"LIVRAISON RAPIDE",benefit_fast_desc:"Livraison ponctuelle, à chaque fois",benefit_safe:"SÛR ET SÉCURISÉ",benefit_safe_desc:"Vos colis sont entre de bonnes mains",benefit_global:"PORTÉE MONDIALE",benefit_global_desc:"Livraison au-delà des frontières",benefit_support:"ASSISTANCE 24/7",benefit_support_desc:"Nous sommes là pour vous aider",services_label:"NOS SERVICES",services_title:"Solutions de messagerie",parcel_title:"Livraison de colis",parcel_desc:"Livraison sûre et fiable pour les colis de différentes tailles.",document_title:"Livraison de documents",document_desc:"Traitement rapide des documents importants et de la correspondance professionnelle.",international_title:"Expédition internationale",international_desc:"Assistance pour les envois qui franchissent les frontières.",all_services:"VOIR TOUS LES SERVICES →",tracking_label:"SUIVI DES ENVOIS",tracking_title:"Suivez votre envoi",tracking_desc:"Entrez votre numéro de suivi pour vérifier l'état de votre envoi.",tracking_placeholder:"Numéro de suivi",tracking_btn:"⌕ SUIVRE",tracking_note:"ⓘ Pour la dernière mise à jour, contactez notre équipe d'assistance.",about_label:"À PROPOS",about_title:"Service fiable",about_desc:"Reliance Global Courier Service se concentre sur la livraison fiable de colis et les solutions logistiques.",about_1:"Service fiable du retrait à la livraison",about_2:"Manutention soignée des envois",about_3:"Communication professionnelle",about_4:"Assistance de livraison pour entreprises et particuliers",learn_more:"EN SAVOIR PLUS →",contact_label:"CONTACTEZ-NOUS",contact_title:"Nous sommes prêts à vous aider.",service_label:"NOTRE SERVICE",service_desc:"Livraison locale et internationale",hours_label:"HORAIRES",hours_desc:"Lundi–vendredi, 9h00–17h00",quick_links:"LIENS RAPIDES",contact_info:"COORDONNÉES",footer_tag:"Nous livrons votre confiance partout dans le monde."}
+};
+['zh','hi','ar','bn','ru','id'].forEach(k=>LANGS[k]=LANGS.en);
+
+function setLanguage(lang){
+ const t=LANGS[lang]||LANGS.en;
+ document.documentElement.lang=lang;
+ document.querySelectorAll('[data-i18n]').forEach(el=>{
+   const key=el.dataset.i18n;
+   if(t[key]) el.textContent=t[key];
+ });
+ document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+   const key=el.dataset.i18nPlaceholder;
+   if(t[key]) el.placeholder=t[key];
+ });
+ const name=document.getElementById('languageName'); if(name) name.textContent=t.name;
+ document.getElementById('languageMenu')?.classList.remove('open');
+ localStorage.setItem('rgcsLanguage',lang);
 }
+const languageToggle=document.getElementById('languageToggle'), languageMenu=document.getElementById('languageMenu');
+languageToggle?.addEventListener('click',()=>languageMenu?.classList.toggle('open'));
+document.querySelectorAll('#languageMenu [data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
+setLanguage(localStorage.getItem('rgcsLanguage')||'en');
