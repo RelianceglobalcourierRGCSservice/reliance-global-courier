@@ -14,3 +14,34 @@
 .language-menu button{display:block;width:100%;text-align:left;border:0;background:#fff;padding:9px 10px;border-radius:5px;font:600 11px Inter,Arial;color:#293b55;cursor:pointer}
 .language-menu button:hover{background:#edf2f8}
 @media(max-width:850px){.language-picker{margin:0}.language-menu{position:static;box-shadow:none;width:100%;margin-top:6px}.language-picker{width:100%}.language-picker>button{width:100%;text-align:left}}
+/* Fix service cards */
+#services article {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+#services article > span {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+#services article b {
+  display: block;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+#services article small {
+  display: block;
+  line-height: 1.5;
+}
+
+#services article div {
+  min-width: 0;
+}
